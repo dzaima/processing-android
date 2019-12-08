@@ -2499,8 +2499,11 @@ public class PApplet extends Object implements ActivityAPI, PConstants {
       keAction = KeyEvent.RELEASE;
     }
 
-    // TODO set up proper key modifier handling
-    int keModifiers = 0;
+    int keModifiers =
+      (event.isShiftPressed() ? Event.SHIFT : 0) |
+      (event.isCtrlPressed()  ? Event.CTRL  : 0) |
+      (event.isMetaPressed()  ? Event.META  : 0) |
+      (event.isAltPressed()   ? Event.ALT   : 0);
 
     KeyEvent ke = new KeyEvent(event, event.getEventTime(),
                                keAction, keModifiers, key, keyCode, 0 < event.getRepeatCount());
